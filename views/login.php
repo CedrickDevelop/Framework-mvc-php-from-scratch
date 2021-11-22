@@ -8,5 +8,5 @@
         <label for="password" class="form-label">password</label>
         <input type="password" class="form-control" name="password" id="password"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary" name="submit-login">Submit</button>
+    <button type="submit" class="btn btn-primary" name="submit-login" value="submit-register">Submit</button>
 </form>

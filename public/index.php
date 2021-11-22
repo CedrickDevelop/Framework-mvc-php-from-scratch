@@ -14,8 +14,8 @@ $app->router->post('/contact', [SiteController::class, 'handleContact']);
 
 // Auth routes
 $app->router->get('/login', [AuthController::class, 'login']); // acceder à la page
-$app->router->post('/login', [AuthController::class, 'login']); // recuperation info connexion
+$app->router->post('/login', [AuthController::class, 'checkLogin']); // recuperation info connexion
 $app->router->get('/register', [AuthController::class, 'register']);// acceder à la page
-$app->router->post('/register', [AuthController::class, 'register']); // recuperation info connexion
+$app->router->post('/register', [AuthController::class, 'checkRegister']); // recuperation info connexion
 
 $app->run();
