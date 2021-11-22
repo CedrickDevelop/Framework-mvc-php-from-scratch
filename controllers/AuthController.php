@@ -6,6 +6,7 @@ use App\core\Request;
 use App\core\Controller;
 use App\core\Application;
 use App\model\RegisterModel;
+use App\core\Form;
 
 class AuthController extends Controller
 {
@@ -44,7 +45,8 @@ class AuthController extends Controller
      */
     public function checkRegister(Request $request)
     {
-        $registerModel = new RegisterModel();              
+        $registerModel = new RegisterModel();       
+        $form = new Form();       
 
         if (isset($request)){
 
@@ -54,7 +56,8 @@ class AuthController extends Controller
                 return 'success';
             } 
             return $this->view('register', [
-                'model' => $registerModel
+                'model' => $registerModel,
+                'form'  => $form
             ]);
         }       
 
@@ -64,7 +67,8 @@ class AuthController extends Controller
         echo '</pre>';
 
         return $this->view('register', [
-            'model' => $registerModel
+            'model' => $registerModel,
+            'form'  => $form
         ]);
     }
 

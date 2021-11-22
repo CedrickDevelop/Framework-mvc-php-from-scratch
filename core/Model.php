@@ -82,6 +82,9 @@
       $this ->errors[$attribute][] = $message ;
     }
 
+    /**
+     * list of errors on the view
+     */
     public function errorMessages()
     {
       return [
@@ -93,11 +96,17 @@
       ];
     }
 
+    /**
+     * when there is an error on the view
+     */
     public function hasError($attribute)
     {
       return $this->errors[$attribute] ?? false ;
     }
 
+    /**
+     * define the first error on the view to show
+     */
     public function getFirstError($attribute)
     {
       return $this->errors[$attribute][0] ?? false;
