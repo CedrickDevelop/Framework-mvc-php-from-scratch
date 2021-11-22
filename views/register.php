@@ -2,7 +2,10 @@
 <form action="" method="post">
     <div class="mb-3">
         <label for="pseudo" class="form-label">Pseudo</label>
-        <input type="text" class="form-control" name="pseudo" id="pseudo" alt="pseudo" minlength="3" maxlength="12" required autofocus >
+        <input type="text" class="form-control <?= $model->hasError('firstname') ? ' is-invalid' : '';  ?>" name="pseudo" id="pseudo" alt="pseudo" value="<?= $model->firstname  ?>" required autofocus >
+        <div class="invalid-feedback">
+            <?= $model->getFirstError('firstname') ?>
+        </div>
     </div>
     <div class="mb-3">
         <label for="email" class="form-label">Email address</label>

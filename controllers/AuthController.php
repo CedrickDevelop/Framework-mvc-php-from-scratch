@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Controllers;
+namespace App\controllers;
 
-use App\Core\Request;
-use App\Core\Controller;
-use App\Core\Application;
+use App\core\Request;
+use App\core\Controller;
+use App\core\Application;
+use App\model\RegisterModel;
 
 class AuthController extends Controller
 {
@@ -37,15 +38,34 @@ class AuthController extends Controller
         print_r($body); 
         echo '</pre>';
     }
-        /**
+
+    /**
      * Handle submitted contact form
      */
-    public static function checkRegister(Request $request)
+    public function checkRegister(Request $request)
     {
-        $body = $request->getBody();
+        $registerModel = new RegisterModel();              
+
+        if (isset($request)){
+
+            $registerModel->loadData($request->getBody());
+    
+            if($registerModel->validate() && $registerModel->register()){
+                return 'success';
+            } 
+            return $this->view('register', [
+                'model' => $registerModel
+            ]);
+        }       
+
+        // $body = $request->getBody();
         echo '<pre>';
-        print_r($body);
+        print_r($request);
         echo '</pre>';
+
+        return $this->view('register', [
+            'model' => $registerModel
+        ]);
     }
 
 }
