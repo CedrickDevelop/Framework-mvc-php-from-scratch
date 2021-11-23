@@ -32,7 +32,7 @@
     {
       return [
         // 'firstname' => [self::RULE_REQUIRED],
-        'pseudo' => [self::RULE_REQUIRED],
+        'pseudo' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 3]],
         'email' => [self::RULE_REQUIRED, self::RULE_EMAIL],
         'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' =>8], [self::RULE_MAX, 'max' => 24]],
         'passwordConfirm' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password' ]],

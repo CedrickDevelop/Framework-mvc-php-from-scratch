@@ -2,18 +2,28 @@
 
   namespace App\Core;
 
-  /**
+use App\Core\Database;
+
+/**
    * load Data and verification of basics
    * abstract : not possible to creating instance of this model
    */
   abstract class Model
   {
-
+    
     public const RULE_REQUIRED = 'required';
     public const RULE_EMAIL = 'email';
     public const RULE_MIN = 'min';
     public const RULE_MAX = 'max';
     public const RULE_MATCH = 'match';
+
+    public Database $database;
+
+    public function __construct()
+    {
+      $this->database = new Database();
+    }
+
 
     /**
      * check if the property exist 

@@ -28,7 +28,7 @@
             <a class="nav-link" href="/contact">Contact</a>
           </li>
         </ul>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-end">
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/register">Register</a>
           </li>

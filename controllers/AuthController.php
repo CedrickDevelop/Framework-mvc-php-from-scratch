@@ -6,6 +6,7 @@ use App\core\Request;
 use App\core\Controller;
 use App\core\Application;
 use App\model\RegisterModel;
+use App\model\LoginModel;
 use App\core\Form;
 
 class AuthController extends Controller
@@ -32,12 +33,39 @@ class AuthController extends Controller
         /**
      * Handle submitted login form
      */
-    public static function checkLogin(Request $request)
+    public function checkLogin(Request $request)
     {
-        $body = $request->getBody();
-        echo '<pre>';
-        print_r($body); 
-        echo '</pre>';
+        $loginModel = new LoginModel();             
+        
+
+        if (isset($request)){
+
+            $loginModel->loadData($request->getBody());
+
+            $userFeedback = '';
+
+                                
+            if ($loginModel->verifyUserMail($loginModel->email)){
+                // On le redirige vers la page de compte connecté
+                header('LOCATION: ../views/welcome.php ');                
+            } else {
+                //if true user email exist already
+                $userFeedback = "Votre email ou mot de passe ne correspondent pas ";
+            }
+            
+
+            return $this->view('login', [
+                'model' => $loginModel,
+                'userExist' => $userFeedback
+            ]);
+        }       
+
+
+
+        return $this->view('login', [
+            'model' => $loginModel
+            // 'form'  => $form
+        ]);
     }
 
     /**
@@ -46,29 +74,27 @@ class AuthController extends Controller
     public function checkRegister(Request $request)
     {
         $registerModel = new RegisterModel();       
-        $form = new Form();       
-
+        // $form = new Form();     
+        
         if (isset($request)){
 
             $registerModel->loadData($request->getBody());
+
+            
     
             if($registerModel->validate() && $registerModel->register()){
                 return 'success';
             } 
+
             return $this->view('register', [
-                'model' => $registerModel,
-                'form'  => $form
+                'model' => $registerModel
+                // 'form'  => $form
             ]);
         }       
 
-        // $body = $request->getBody();
-        echo '<pre>';
-        print_r($request);
-        echo '</pre>';
-
         return $this->view('register', [
-            'model' => $registerModel,
-            'form'  => $form
+            'model' => $registerModel
+            // 'form'  => $form
         ]);
     }
 
